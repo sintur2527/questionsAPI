@@ -14,7 +14,7 @@ CREATE TABLE questions (
   helpful INTEGER
 );
 
-COPY questions FROM '/Users/soumithinturi/Documents/hack-reactor-nyc23/hammer-questions/data/questions.csv' DELIMITERS ',' CSV HEADER;
+COPY questions FROM '/Users/soumithinturi/Documents/hack-reactor-nyc23/hammer-questions/db/data/questions.csv' DELIMITERS ',' CSV HEADER;
 
 CREATE TABLE answers (
   id INTEGER PRIMARY KEY NOT NULL,
@@ -27,7 +27,7 @@ CREATE TABLE answers (
   helpful INTEGER  
 );
 
-COPY answers FROM '/Users/soumithinturi/Documents/hack-reactor-nyc23/hammer-questions/data/answers.csv' DELIMITERS ',' CSV HEADER;
+COPY answers FROM '/Users/soumithinturi/Documents/hack-reactor-nyc23/hammer-questions/db/data/answers.csv' DELIMITERS ',' CSV HEADER;
 
 CREATE TABLE photos (
   id INTEGER NOT NULL,
@@ -36,4 +36,6 @@ CREATE TABLE photos (
   PRIMARY KEY (id, answer_id)
 );
 
-COPY photos FROM '/Users/soumithinturi/Documents/hack-reactor-nyc23/hammer-questions/data/answers_photos.csv' DELIMITERS ',' CSV HEADER;
+COPY photos FROM '/Users/soumithinturi/Documents/hack-reactor-nyc23/hammer-questions/db/data/answers_photos.csv' DELIMITERS ',' CSV HEADER;
+
+/* psql postgres -U soumithinturi -a -f db/schema.sql */

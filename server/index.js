@@ -12,7 +12,11 @@ app.use(
   })
 );
 
-app.use('/', router);
+// app.use('/', router);
+
+app.get('/', (req, res) => {
+  res.send(`It's working!`);
+});
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {

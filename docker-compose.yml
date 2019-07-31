@@ -1,13 +1,20 @@
-version: '2.1'
+version: '3'
 
 services:
-  hammer-questions:
-    image: hammer-questions
-    build: .
-    environment:
-      NODE_ENV: production
+  web:
+    # replace username/repo:tag with your name and image details
+    image: sintur2527/questions:hammerquestions
+    deploy:
+      replicas: 5
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 50M
+      restart_policy:
+        condition: on-failure
     ports:
-      - 4000:4000
-
-  postgres:
-    image:
+      - '4000:4000'
+    networks:
+      - webnet
+networks:
+  webnet:
