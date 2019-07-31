@@ -1,0 +1,24 @@
+{
+  "name": "hammer-questions",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hrnyc23-hammer/questionsAPI.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hrnyc23-hammer/questionsAPI/issues"
+  },
+  "homepage": "https://github.com/hrnyc23-hammer/questionsAPI#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "pg-promise": "^9.0.0"
+  }
+}
