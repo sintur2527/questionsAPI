@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server/index.js"
   },
   "repository": {
     "type": "git",
@@ -17,8 +18,5 @@
     "url": "https://github.com/hrnyc23-hammer/questionsAPI/issues"
   },
   "homepage": "https://github.com/hrnyc23-hammer/questionsAPI#readme",
-  "dependencies": {
-    "express": "^4.17.1",
-    "pg-promise": "^9.0.0"
-  }
+  "dependencies": {}
 }
