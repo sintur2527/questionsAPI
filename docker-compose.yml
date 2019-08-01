@@ -2,6 +2,16 @@ version: '3'
 services:
   postgres:
     image: 'postgres:latest'
+    restart: always
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=postgres
+      - POSTGRES_PASSWORD=postgres_password
+    volumes:
+      - ./server/db/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+      - ./data:/docker-entrypoint-initdb.d/csv
   server:
     build:
       dockerfile: Dockerfile
@@ -17,3 +27,6 @@ services:
       - PGDATABASE=postgres
       - PGPASSWORD=postgres_password
       - PGPORT=5432
+volumes:
+  database_data:
+    driver: local

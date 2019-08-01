@@ -2,7 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
-// const router = require('../routes');
+const router = require('./routes');
+const keys = require('./keys');
 
 const app = express();
 
@@ -14,7 +15,7 @@ app.use(
   })
 );
 
-// app.use('/', router);
+app.use('/', router);
 
 app.get('/', (req, res) => {
   res.send(`It's working!`);

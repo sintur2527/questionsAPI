@@ -1,8 +1,5 @@
-DROP DATABASE IF EXISTS questions;
-CREATE DATABASE questions;
 
-\c questions;
-
+DROP TABLE IF EXISTS questions;
 CREATE TABLE questions (
   id INTEGER PRIMARY KEY,
   product_id INTEGER, 
@@ -14,8 +11,7 @@ CREATE TABLE questions (
   helpful INTEGER
 );
 
-COPY questions FROM '/Users/soumithinturi/Documents/hack-reactor-nyc23/hammer-questions/db/data/questions.csv' DELIMITERS ',' CSV HEADER;
-
+DROP TABLE IF EXISTS photos;
 CREATE TABLE answers (
   id INTEGER PRIMARY KEY NOT NULL,
   question_id INTEGER , 
@@ -27,8 +23,7 @@ CREATE TABLE answers (
   helpful INTEGER  
 );
 
-COPY answers FROM '/Users/soumithinturi/Documents/hack-reactor-nyc23/hammer-questions/db/data/answers.csv' DELIMITERS ',' CSV HEADER;
-
+DROP TABLE IF EXISTS photos;
 CREATE TABLE photos (
   id INTEGER NOT NULL,
   answer_id INTEGER,
@@ -36,6 +31,8 @@ CREATE TABLE photos (
   PRIMARY KEY (id, answer_id)
 );
 
-COPY photos FROM '/Users/soumithinturi/Documents/hack-reactor-nyc23/hammer-questions/db/data/answers_photos.csv' DELIMITERS ',' CSV HEADER;
+\copy questions FROM './docker-entrypoint-initdb.d/csv/questions.csv' DELIMITERS ',' CSV HEADER;
 
-/* psql postgres -U soumithinturi -a -f db/schema.sql */
+\copy answers FROM './docker-entrypoint-initdb.d/csv/answers.csv' DELIMITERS ',' CSV HEADER;
+
+\copy photos FROM './docker-entrypoint-initdb.d/csv/answers_photos.csv' DELIMITERS ',' CSV HEADER;
