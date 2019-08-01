@@ -3,7 +3,6 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 
 const router = require('./routes');
-const keys = require('./keys');
 
 const app = express();
 
@@ -18,7 +17,7 @@ app.use(
 app.use('/', router);
 
 app.get('/', (req, res) => {
-  res.send(`It's working!`);
+  res.send(`Server is hooked up to Docker`);
 });
 
 const PORT = process.env.PORT || 4000;

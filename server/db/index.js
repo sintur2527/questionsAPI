@@ -1,5 +1,5 @@
 const keys = require('../keys');
-const pgp = require('pg-promise')(/*options*/);
+const pgp = require('pg-promise')();
 
 const config = {
   user: keys.pgUser,
