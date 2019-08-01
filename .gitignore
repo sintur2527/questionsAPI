@@ -332,5 +332,4 @@ ASALocalRun/
 package-lock.json
 data/
 
-docker-compose.yml
-docker-compose.debug.yml
+docker-compose*
