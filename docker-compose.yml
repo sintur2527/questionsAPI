@@ -6,9 +6,9 @@ services:
     ports:
       - '5432:5432'
     environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_DB=postgres
-      - POSTGRES_PASSWORD=postgres_password
+      - POSTGRES_USER=root
+      - POSTGRES_DB=greenfield_qa
+      - POSTGRES_PASSWORD=TkY1S361HFaF
     volumes:
       - ./server/db/schema.sql:/docker-entrypoint-initdb.d/schema.sql
       - ./data:/docker-entrypoint-initdb.d/csv
@@ -22,10 +22,10 @@ services:
     ports:
       - '4000:4000'
     environment:
-      - PGUSER=postgres
+      - PGUSER=root
       - PGHOST=postgres
-      - PGDATABASE=postgres
-      - PGPASSWORD=postgres_password
+      - PGDATABASE=greenfield_qa
+      - PGPASSWORD=TkY1S361HFaF
       - PGPORT=5432
 volumes:
   database_data:
