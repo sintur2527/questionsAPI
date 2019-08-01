@@ -1,20 +1,19 @@
 version: '3'
-
 services:
-  web:
-    # replace username/repo:tag with your name and image details
-    image: sintur2527/questions:hammerquestions
-    deploy:
-      replicas: 5
-      resources:
-        limits:
-          cpus: '0.1'
-          memory: 50M
-      restart_policy:
-        condition: on-failure
+  postgres:
+    image: 'postgres:latest'
+  server:
+    build:
+      dockerfile: Dockerfile
+      context: './server'
+    volumes:
+      - /app/node_modules
+      - ./server:/app
     ports:
       - '4000:4000'
-    networks:
-      - webnet
-networks:
-  webnet:
+    environment:
+      - PGUSER=postgres
+      - PGHOST=postgres
+      - PGDATABASE=postgres
+      - PGPASSWORD=postgres_password
+      - PGPORT=5432
