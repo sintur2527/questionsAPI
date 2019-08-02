@@ -4,7 +4,7 @@ module.exports = {
   questions: {
     get: (req, res) => {
       models.questions
-        .get()
+        .get(req.params.product_id)
         .then(data => {
           res.status(200).send(data);
         })
@@ -16,7 +16,7 @@ module.exports = {
   answers: {
     get: (req, res) => {
       models.answers
-        .get()
+        .get(req.params.id)
         .then(data => {
           res.status(200).send(data);
         })

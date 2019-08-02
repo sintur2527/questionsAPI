@@ -1,3 +1,8 @@
+DROP DATABASE IF EXISTS questions;
+CREATE DATABASE questions;
+
+\c questions
+
 DROP TABLE IF EXISTS questions;
 CREATE TABLE questions (
   id INTEGER PRIMARY KEY NOT NULL,
@@ -28,11 +33,14 @@ CREATE TABLE photos (
   url VARCHAR
 );
 
-\copy questions FROM './docker-entrypoint-initdb.d/csv/questions.csv' DELIMITERS ',' CSV HEADER;
+\copy questions FROM '/Users/soumithinturi/Documents/hack-reactor-nyc23/hammer-questions/data/questions.csv' DELIMITERS ',' CSV HEADER;
 
-\copy answers FROM './docker-entrypoint-initdb.d/csv/answers.csv' DELIMITERS ',' CSV HEADER;
+\copy answers FROM '/Users/soumithinturi/Documents/hack-reactor-nyc23/hammer-questions/data/answers.csv' DELIMITERS ',' CSV HEADER;
 
-\copy photos FROM './docker-entrypoint-initdb.d/csv/answers_photos.csv' DELIMITERS ',' CSV HEADER;
+\copy photos FROM '/Users/soumithinturi/Documents/hack-reactor-nyc23/hammer-questions/data/answers_photos.csv' DELIMITERS ',' CSV HEADER;
 
 CREATE INDEX question_id_idx ON answers (question_id);
 CREATE INDEX answer_id_idx ON photos (answer_id);
+
+
+
