@@ -16,11 +16,4 @@ module.exports = {
       );
     },
   },
-  photos: {
-    get: answer_id => {
-      return db.any('SELECT (id, url) FROM photos WHERE answer_id = $1', [
-        answer_id,
-      ]);
-    },
-  },
 };

@@ -42,5 +42,7 @@ CREATE TABLE photos (
 CREATE INDEX question_id_idx ON answers (question_id);
 CREATE INDEX answer_id_idx ON photos (answer_id);
 
+SELECT answers.*, ARRAY_AGG(url) photos FROM answers LEFT JOIN photos ON answers.id = photos.answer_id GROUP BY answers.id;
+
 
 
