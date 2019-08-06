@@ -15,10 +15,12 @@ module.exports = {
   },
   answers: {
     get: (req, res) => {
+      console.time('get answers');
       models.answers
-        .get(req.params.id)
+        .get(req.params.question_id)
         .then(data => {
           res.status(200).send(data);
+          console.timeEnd('get answers');
         })
         .catch(err => {
           res.status(500).send(err);
