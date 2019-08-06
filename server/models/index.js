@@ -4,23 +4,33 @@ module.exports = {
   questions: {
     get: product_id => {
       return db
-        .any('SELECT * FROM questions WHERE product_id = $1', [product_id])
+        .any(
+          'SELECT question_id, question_body, question_date, asker_name, asker_email, question_helpfulness, reported FROM questions WHERE product_id = $1',
+          [product_id]
+        )
         .then(data => {
           return Promise.all(
             data.map(question => {
               question.answers = {};
               return db
-                .any('SELECT * FROM answers where question_id = $1', [
-                  question.id,
-                ])
+                .any(
+                  'SELECT id, body, date, answerer_name, answerer_email, helpfulness, reported, photos FROM answers where question_id = $1',
+                  [question.question_id]
+                )
                 .then(answers => {
-                  return answers.map(answer => {
+                  answers.forEach(answer => {
                     question.answers[answer.id] = answer;
-                    return question;
                   });
+                  return question;
+                })
+                .catch(err => {
+                  console.error(err);
                 });
             })
           );
+        })
+        .catch(err => {
+          console.error(err);
         });
     },
     post: product_id => {

@@ -6,10 +6,16 @@ module.exports = {
       models.questions
         .get(req.params.product_id)
         .then(data => {
-          res.status(200).send(data);
+          let question_data = {
+            product_id: req.params.product_id,
+            results: data,
+          };
+
+          res.status(200).send(question_data);
         })
         .catch(err => {
-          res.status(500).send(err);
+          console.error(err);
+          res.status(500);
         });
     },
   },
