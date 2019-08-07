@@ -331,5 +331,3 @@ ASALocalRun/
 
 package-lock.json
 data/
-
-docker-compose*
