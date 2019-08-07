@@ -3,15 +3,18 @@ const models = require('../models');
 module.exports = {
   questions: {
     get: (req, res) => {
+      const { product_id } = req.params;
+      const { page, count } = req.query;
+      console.time('get questions');
       models.questions
-        .get(req.params.product_id)
+        .get(product_id, page, count)
         .then(data => {
           let question_data = {
-            product_id: req.params.product_id,
+            product_id: product_id,
             results: data,
           };
-
           res.status(200).send(question_data);
+          console.timeEnd('get questions');
         })
         .catch(err => {
           console.error(err);
@@ -21,11 +24,19 @@ module.exports = {
   },
   answers: {
     get: (req, res) => {
+      const { question_id } = req.params;
+      const { page, count } = req.query;
       console.time('get answers');
       models.answers
-        .get(req.params.question_id)
+        .get(question_id, page, count)
         .then(data => {
-          res.status(200).send(data);
+          let answer_data = {
+            question: question_id,
+            page: page,
+            count: count,
+            results: data,
+          };
+          res.status(200).send(answer_data);
           console.timeEnd('get answers');
         })
         .catch(err => {
