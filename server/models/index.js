@@ -2,7 +2,7 @@ const db = require('../db');
 
 module.exports = {
   questions: {
-    get: (product_id, page, count) => {
+    get: (product_id, page = 1, count = 5) => {
       return db
         .any(
           'SELECT question_id, question_body, question_date, asker_name, asker_email, question_helpfulness, reported FROM questions WHERE product_id = $1 AND reported = 0 LIMIT $3 OFFSET $3 * ($2 - 1)',
@@ -53,7 +53,7 @@ module.exports = {
     },
   },
   answers: {
-    get: (question_id, page, count) => {
+    get: (question_id, page = 1, count = 5) => {
       return db.any(
         'SELECT * FROM answers WHERE question_id = $1 LIMIT $3 OFFSET $3 * ($2 - 1)',
         [question_id, page, count]

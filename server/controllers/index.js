@@ -32,8 +32,8 @@ module.exports = {
         .then(data => {
           let answer_data = {
             question: question_id,
-            page: page,
-            count: count,
+            page: parseInt(page) || 1,
+            count: parseInt(count) || 5,
             results: data,
           };
           res.status(200).send(answer_data);
