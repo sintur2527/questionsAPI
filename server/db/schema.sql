@@ -48,7 +48,6 @@ ALTER TABLE questions RENAME COLUMN helpful TO question_helpfulness;
 ALTER TABLE answers RENAME COLUMN date_written TO date;
 ALTER TABLE answers RENAME COLUMN helpful TO helpfulness;
 
-CREATE INDEX product_id_idx ON questions (product_id);
-CREATE INDEX question_id_idx ON answers (question_id);
-CREATE INDEX answer_id_idx ON photos (answer_id);
+CREATE INDEX product_id_idx ON questions (product_id) WHERE reported = 0;
+CREATE INDEX question_id_idx ON answers (question_id) WHERE reported = 0;
 
