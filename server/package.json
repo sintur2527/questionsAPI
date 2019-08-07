@@ -10,5 +10,9 @@
   "scripts": {
     "start": "nodemon index.js",
     "seed": "node --max-old-space-size=8192 seed.js"
+  },
+  "devDependencies": {
+    "frisby": "^2.1.2",
+    "jest": "^24.8.0"
   }
 }
