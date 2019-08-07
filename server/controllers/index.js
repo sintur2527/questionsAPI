@@ -21,6 +21,30 @@ module.exports = {
           res.status(500);
         });
     },
+    helpful: (req, res) => {
+      const { question_id } = req.params;
+      models.questions
+        .helpful(question_id)
+        .then(data => {
+          res.status(204);
+        })
+        .catch(err => {
+          console.error(err);
+          res.status(500);
+        });
+    },
+    report: (req, res) => {
+      const { question_id } = req.params;
+      models.questions
+        .report(question_id)
+        .then(data => {
+          res.status(204);
+        })
+        .catch(err => {
+          console.error(err);
+          res.status(500);
+        });
+    },
   },
   answers: {
     get: (req, res) => {
@@ -41,6 +65,30 @@ module.exports = {
         })
         .catch(err => {
           res.status(500).send(err);
+        });
+    },
+    helpful: (req, res) => {
+      const { answer_id } = req.params;
+      models.answers
+        .helpful(answer_id)
+        .then(data => {
+          res.status(204);
+        })
+        .catch(err => {
+          console.error(err);
+          res.status(500);
+        });
+    },
+    report: (req, res) => {
+      const { answer_id } = req.params;
+      models.answers
+        .report(answer_id)
+        .then(data => {
+          res.status(204);
+        })
+        .catch(err => {
+          console.error(err);
+          res.status(500);
         });
     },
   },

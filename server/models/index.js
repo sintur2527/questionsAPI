@@ -14,7 +14,7 @@ module.exports = {
               question.answers = {};
               return db
                 .any(
-                  'SELECT id, body, date, answerer_name, answerer_email, helpfulness, reported, photos FROM answers where question_id = $1 AND reported = 0',
+                  'SELECT id, body, date, answerer_name, answerer_email, helpfulness, photos FROM answers where question_id = $1 AND reported = 0',
                   [question.question_id]
                 )
                 .then(answers => {
@@ -41,13 +41,13 @@ module.exports = {
     },
     helpful: question_id => {
       return db.none(
-        'UPDATE questions SET helpful = helpful + 1 WHERE id = $1',
+        'UPDATE questions SET question_helpfulness = question_helpfulness + 1 WHERE question_id = $1',
         [question_id]
       );
     },
     report: question_id => {
       return db.none(
-        'UPDATE questions SET reported = reported + 1 WHERE id = $1',
+        'UPDATE questions SET reported = reported + 1 WHERE question_id = $1',
         [question_id]
       );
     },
@@ -55,7 +55,7 @@ module.exports = {
   answers: {
     get: (question_id, page = 1, count = 5) => {
       return db.any(
-        'SELECT * FROM answers WHERE question_id = $1 LIMIT $3 OFFSET $3 * ($2 - 1)',
+        'SELECT id, body, date, answerer_name, answerer_email, helpfulness, photos FROM answers WHERE question_id = $1 LIMIT $3 OFFSET $3 * ($2 - 1)',
         [question_id, page, count]
       );
     },
@@ -63,9 +63,10 @@ module.exports = {
       return db.none();
     },
     helpful: answer_id => {
-      return db.none('UPDATE answers SET helpful = helpful + 1 WHERE id = $1', [
-        answer_id,
-      ]);
+      return db.none(
+        'UPDATE answers SET helpfulness = helpfulness + 1 WHERE id = $1',
+        [answer_id]
+      );
     },
     report: answer_id => {
       return db.none(
