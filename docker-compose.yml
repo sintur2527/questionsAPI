@@ -12,6 +12,7 @@ services:
     volumes:
       - ./server/db/schema.sql:/docker-entrypoint-initdb.d/schema.sql
       - ./server/data:/docker-entrypoint-initdb.d/csv
+      - ./efs:/docker-entrypoint-initdb.d/csv
   server:
     build:
       dockerfile: Dockerfile
