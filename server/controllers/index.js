@@ -5,7 +5,7 @@ module.exports = {
     get: (req, res) => {
       const { product_id } = req.params;
       const { page, count } = req.query;
-      console.time('get questions');
+
       models.questions
         .get(product_id, page, count)
         .then(data => {
@@ -14,7 +14,6 @@ module.exports = {
             results: data,
           };
           res.status(200).send(question_data);
-          console.timeEnd('get questions');
         })
         .catch(err => {
           console.error(err);
@@ -37,6 +36,7 @@ module.exports = {
     },
     helpful: (req, res) => {
       const { question_id } = req.params;
+
       models.questions
         .helpful(question_id)
         .then(data => {
@@ -49,6 +49,7 @@ module.exports = {
     },
     report: (req, res) => {
       const { question_id } = req.params;
+
       models.questions
         .report(question_id)
         .then(data => {
@@ -64,7 +65,7 @@ module.exports = {
     get: (req, res) => {
       const { question_id } = req.params;
       const { page, count } = req.query;
-      console.time('get answers');
+
       models.answers
         .get(question_id, page, count)
         .then(data => {
@@ -79,11 +80,11 @@ module.exports = {
         .catch(err => {
           res.status(500).send(err);
         });
-      console.timeEnd('get answers');
     },
     post: (req, res) => {
       const { question_id } = req.params;
       const { body, name, email, photos } = req.body;
+
       models.answers
         .post(question_id, body, name, email, photos)
         .then(data => {
@@ -96,6 +97,7 @@ module.exports = {
     },
     helpful: (req, res) => {
       const { answer_id } = req.params;
+
       models.answers
         .helpful(answer_id)
         .then(data => {
