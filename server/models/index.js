@@ -5,7 +5,7 @@ module.exports = {
     get: (product_id, page = 1, count = 5) => {
       return db
         .any(
-          'SELECT question_id, question_body, question_date, asker_name, asker_email, question_helpfulness, reported FROM questions WHERE product_id = $1 AND reported = 0 LIMIT $3 OFFSET $3 * ($2 - 1)',
+          'SELECT question_id, question_body, question_date, asker_name, asker_email, question_helpfulness, reported FROM questions WHERE product_id = $1 AND reported = 0 ORDER BY question_helpfulness DESC LIMIT $3 OFFSET $3 * ($2 - 1)',
           [product_id, page, count]
         )
         .then(data => {
@@ -55,7 +55,7 @@ module.exports = {
   answers: {
     get: (question_id, page = 1, count = 5) => {
       return db.any(
-        'SELECT id, body, date, answerer_name, answerer_email, helpfulness, photos FROM answers WHERE question_id = $1 LIMIT $3 OFFSET $3 * ($2 - 1)',
+        'SELECT id, body, date, answerer_name, answerer_email, helpfulness, photos FROM answers WHERE question_id = $1 ORDER BY helpfulness DESC LIMIT $3 OFFSET $3 * ($2 - 1)',
         [question_id, page, count]
       );
     },
