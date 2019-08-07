@@ -47,7 +47,7 @@ module.exports = {
     },
     report: question_id => {
       return db.none(
-        'UPDATE questions SET reported = reported + 1 WHERE question_id = $1',
+        'UPDATE questions SET reported = 1 WHERE question_id = $1',
         [question_id]
       );
     },
@@ -72,10 +72,9 @@ module.exports = {
       );
     },
     report: answer_id => {
-      return db.none(
-        'UPDATE answers SET reported = reported + 1 WHERE id = $1',
-        [answer_id]
-      );
+      return db.none('UPDATE answers SET reported = 1 WHERE id = $1', [
+        answer_id,
+      ]);
     },
   },
 };
