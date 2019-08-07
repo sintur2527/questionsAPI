@@ -26,7 +26,7 @@ module.exports = {
       models.questions
         .helpful(question_id)
         .then(data => {
-          res.status(204);
+          res.sendStatus(204);
         })
         .catch(err => {
           console.error(err);
@@ -38,7 +38,7 @@ module.exports = {
       models.questions
         .report(question_id)
         .then(data => {
-          res.status(204);
+          res.sendStatus(204);
         })
         .catch(err => {
           console.error(err);
@@ -72,7 +72,7 @@ module.exports = {
       models.answers
         .helpful(answer_id)
         .then(data => {
-          res.status(204);
+          res.sendStatus(204);
         })
         .catch(err => {
           console.error(err);
@@ -84,7 +84,7 @@ module.exports = {
       models.answers
         .report(answer_id)
         .then(data => {
-          res.status(204);
+          res.sendStatus(204);
         })
         .catch(err => {
           console.error(err);
