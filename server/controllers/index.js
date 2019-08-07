@@ -21,6 +21,20 @@ module.exports = {
           res.status(500);
         });
     },
+    post: (req, res) => {
+      const { product_id } = req.params;
+      const { body, name, email } = req.body;
+
+      models.questions
+        .post(product_id, body, name, email)
+        .then(data => {
+          res.sendStatus(201);
+        })
+        .catch(err => {
+          console.error(err);
+          res.status(500);
+        });
+    },
     helpful: (req, res) => {
       const { question_id } = req.params;
       models.questions
@@ -61,10 +75,23 @@ module.exports = {
             results: data,
           };
           res.status(200).send(answer_data);
-          console.timeEnd('get answers');
         })
         .catch(err => {
           res.status(500).send(err);
+        });
+      console.timeEnd('get answers');
+    },
+    post: (req, res) => {
+      const { question_id } = req.params;
+      const { body, name, email, photos } = req.body;
+      models.answers
+        .post(question_id, body, name, email, photos)
+        .then(data => {
+          res.sendStatus(201);
+        })
+        .catch(err => {
+          console.error(err);
+          res.status(500);
         });
     },
     helpful: (req, res) => {

@@ -3,11 +3,11 @@ CREATE TABLE questions (
   id SERIAL PRIMARY KEY,
   product_id INTEGER, 
   body VARCHAR NOT NULL,
-  date_written TIMESTAMP NOT NULL,
+  date_written TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   asker_name VARCHAR (50) NOT NULL,
   asker_email VARCHAR (100) NOT NULL,
-  reported INTEGER,
-  helpful INTEGER
+  reported INTEGER DEFAULT 0,
+  helpful INTEGER DEFAULT 0
 );
 
 DROP TABLE IF EXISTS answers;
@@ -15,11 +15,11 @@ CREATE TABLE answers (
   id SERIAL PRIMARY KEY,
   question_id INTEGER, 
   body VARCHAR NOT NULL,
-  date_written TIMESTAMP NOT NULL,
+  date_written TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   answerer_name VARCHAR (50) NOT NULL,
   answerer_email VARCHAR (100) NOT NULL,
-  reported INTEGER,
-  helpful INTEGER,
+  reported INTEGER DEFAULT 0,
+  helpful INTEGER DEFAULT 0,
   photos jsonb[] DEFAULT '{}'::jsonb[]
 );
 
@@ -48,6 +48,7 @@ ALTER TABLE questions RENAME COLUMN helpful TO question_helpfulness;
 ALTER TABLE answers RENAME COLUMN date_written TO date;
 ALTER TABLE answers RENAME COLUMN helpful TO helpfulness;
 
+CREATE INDEX product_id_idx ON questions (product_id);
 CREATE INDEX question_id_idx ON answers (question_id);
 CREATE INDEX answer_id_idx ON photos (answer_id);
 

@@ -33,10 +33,10 @@ module.exports = {
           console.error(err);
         });
     },
-    post: product_id => {
+    post: (product_id, body, name, email) => {
       return db.none(
-        'INSERT INTO questions (product_id, question_body, asker_name, asker_email) VALUES $1, $2, $3, $4',
-        [product_id, req.body.body, req.body.name, req.body.email]
+        'INSERT INTO questions (product_id, question_body, asker_name, asker_email) VALUES ($1, $2, $3, $4)',
+        [product_id, body, name, email]
       );
     },
     helpful: question_id => {
@@ -59,8 +59,11 @@ module.exports = {
         [question_id, page, count]
       );
     },
-    post: question_id => {
-      return db.none();
+    post: (question_id, body, name, email, photos) => {
+      return db.none(
+        'INSERT INTO answers (question_id, body, answerer_name, answerer_email, photos) VALUES ($1, $2, $3, $4, $5)',
+        [question_id, body, name, email, photos]
+      );
     },
     helpful: answer_id => {
       return db.none(
