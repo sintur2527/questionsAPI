@@ -6,48 +6,40 @@ CREATE DATABASE questions;
 DROP TABLE IF EXISTS questions;
 CREATE TABLE questions (
   id SERIAL PRIMARY KEY,
-  product_id INTEGER NOT NULL, 
+  product_id INTEGER, 
   body VARCHAR NOT NULL,
-  date_written TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  date_written TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   asker_name VARCHAR (50) NOT NULL,
   asker_email VARCHAR (100) NOT NULL,
-  reported INTEGER NOT NULL DEFAULT 0,
-  helpful INTEGER
+  reported INTEGER DEFAULT 0,
+  helpful INTEGER DEFAULT 0
 );
-
-SELECT setval('questions_questions_id_seq', SELECT count(*) FROM questions, true);
 
 DROP TABLE IF EXISTS answers;
 CREATE TABLE answers (
   id SERIAL PRIMARY KEY,
-  question_id INTEGER NOT NULL, 
+  question_id INTEGER, 
   body VARCHAR NOT NULL,
-  date_written TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  date_written TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   answerer_name VARCHAR (50) NOT NULL,
   answerer_email VARCHAR (100) NOT NULL,
-  reported INTEGER NOT NULL DEFAULT 0,
-  helpful INTEGER 
+  reported INTEGER DEFAULT 0,
+  helpful INTEGER DEFAULT 0
 );
 
-SELECT setval('answers_answers_id_seq', SELECT count(*) FROM answers, true);
-
+DROP TABLE IF EXISTS photos;
 CREATE TABLE photos (
   id SERIAL PRIMARY KEY,
-  answer_id INTEGER NOT NULL,
+  answer_id INTEGER,
   url VARCHAR
 );
 
-SELECT setval('photos_photos_id_seq', SELECT count(*) FROM photos, true);
+\copy questions FROM '/Users/soumithinturi/Documents/hack-reactor-nyc23/hammer-questions/server/data/questions.csv' DELIMITERS ',' CSV HEADER;
 
-\copy questions FROM '/Users/soumithinturi/Documents/hack-reactor-nyc23/hammer-questions/data/questions.csv' DELIMITERS ',' CSV HEADER;
+\copy answers FROM '/Users/soumithinturi/Documents/hack-reactor-nyc23/hammer-questions/server/data/answers.csv' DELIMITERS ',' CSV HEADER;
 
-\copy answers FROM '/Users/soumithinturi/Documents/hack-reactor-nyc23/hammer-questions/data/answers.csv' DELIMITERS ',' CSV HEADER;
-
-\copy photos FROM '/Users/soumithinturi/Documents/hack-reactor-nyc23/hammer-questions/data/answers_photos.csv' DELIMITERS ',' CSV HEADER;
-
-CREATE INDEX question_id_idx ON answers (question_id);
-CREATE INDEX answer_id_idx ON photos (answer_id);
+\copy photos FROM '/Users/soumithinturi/Documents/hack-reactor-nyc23/hammer-questions/server/data/answers_photos.csv' DELIMITERS ',' CSV HEADER;
 
 ALTER TABLE answers ADD COLUMN photos jsonb[] DEFAULT '{}'::jsonb[];
 
--- COPY answers TO '/Users/soumithinturi/Documents/hack-reactor-nyc23/hammer-questions/data/answers2.csv' DELIMITER ',' CSV HEADER;
+-- COPY answers TO '/Users/soumithinturi/Documents/hack-reactor-nyc23/hammer-questions/server/data/seeded_answers.csv' DELIMITER ',' CSV HEADER;

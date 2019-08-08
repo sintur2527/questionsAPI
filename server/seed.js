@@ -16,7 +16,7 @@ const db = pgp(config);
 let totalCount = 0;
 
 const fileStream = fs.createReadStream(
-  '/Users/soumithinturi/Documents/hack-reactor-nyc23/hammer-questions/data/answers_photos.csv'
+  '/Users/soumithinturi/Documents/hack-reactor-nyc23/hammer-questions/server/data/answers_photos.csv'
 );
 
 fileStream.pipe(csv.parse({ headers: true })).on('data', row => {
