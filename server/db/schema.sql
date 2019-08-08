@@ -32,7 +32,7 @@ CREATE TABLE photos (
 
 \copy questions FROM './docker-entrypoint-initdb.d/csv/questions.csv' DELIMITERS ',' CSV HEADER;
 
-\copy answers FROM './docker-entrypoint-initdb.d/csv/answers2.csv' DELIMITERS ',' CSV HEADER;
+\copy answers FROM './docker-entrypoint-initdb.d/csv/seeded_answers.csv' DELIMITERS ',' CSV HEADER;
 
 \copy photos FROM './docker-entrypoint-initdb.d/csv/answers_photos.csv' DELIMITERS ',' CSV HEADER;
 
