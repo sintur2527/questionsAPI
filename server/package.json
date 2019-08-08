@@ -9,7 +9,9 @@
   },
   "scripts": {
     "start": "nodemon index.js",
-    "seed": "node --max-old-space-size=8192 seed.js"
+    "seed": "node --max-old-space-size=8192 seed.js",
+    "test": "jest",
+    "coverage": "jest --coverage"
   },
   "devDependencies": {
     "frisby": "^2.1.2",
