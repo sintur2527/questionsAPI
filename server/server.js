@@ -79,7 +79,6 @@ fastify.get('/qa/:product_id', (req, reply) => {
   const { product_id } = req.params;
   const { page, count } = req.query;
 
-  console.time('get questions');
   models.questions
     .get(product_id, page, count)
     .then(data => {
@@ -88,7 +87,6 @@ fastify.get('/qa/:product_id', (req, reply) => {
         results: data,
       };
       reply.code(200).send(question_data);
-      console.timeEnd('get questions');
     })
     .catch(err => {
       fastify.log.error(err);
@@ -100,12 +98,10 @@ fastify.post('/qa/:product_id', (req, reply) => {
   const { product_id } = req.params;
   const { body, name, email } = req.body;
 
-  console.time('post questions');
   models.questions
     .post(product_id, body, name, email)
     .then(data => {
       reply.code(204);
-      console.timeEnd('post questions');
     })
     .catch(err => {
       fastify.log.error(err);
@@ -116,12 +112,10 @@ fastify.post('/qa/:product_id', (req, reply) => {
 fastify.put('/qa/question/:question_id/helpful', (req, reply) => {
   const { question_id } = req.params;
 
-  console.time('helpful');
   models.questions
     .helpful(question_id)
     .then(data => {
       reply.code(204);
-      console.timeEnd('helpful');
     })
     .catch(err => {
       fastify.log.error(err);
@@ -132,12 +126,10 @@ fastify.put('/qa/question/:question_id/helpful', (req, reply) => {
 fastify.put('/qa/question/:question_id/report', (req, reply) => {
   const { question_id } = req.params;
 
-  console.time('report');
   models.questions
     .report(question_id)
     .then(data => {
       reply.code(204);
-      console.timeEnd('report');
     })
     .catch(err => {
       fastify.log.error(err);
