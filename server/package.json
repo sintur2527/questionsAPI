@@ -3,12 +3,13 @@
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "fast-csv": "^3.4.0",
+    "fastify": "^2.7.1",
     "nodemon": "^1.19.1",
-    "pg-promise": "^9.0.0",
-    "fast-csv": "^3.4.0"
+    "pg-promise": "^9.0.0"
   },
   "scripts": {
-    "start": "nodemon index.js",
+    "start": "nodemon server.js",
     "seed": "node --max-old-space-size=8192 seed.js",
     "test": "jest",
     "coverage": "jest --coverage"
