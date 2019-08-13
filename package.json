@@ -19,6 +19,7 @@
   "homepage": "https://github.com/hrnyc23-hammer/questionsAPI#readme",
   "dependencies": {
     "fast-csv": "^3.4.0",
+    "fastify-static": "^2.5.0",
     "pg-promise": "^9.0.0"
   }
 }

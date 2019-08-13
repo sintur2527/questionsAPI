@@ -1,9 +1,14 @@
 const fastify = require('fastify')({ logger: true });
+const path = require('path');
 const cors = require('cors');
 
 const models = require('./models');
 
 fastify.use(cors());
+
+fastify.register(require('fastify-static'), {
+  root: path.join(__dirname, './dist'),
+});
 
 fastify.get('/', (req, reply) => {
   reply.send(`Server is hooked up to Docker`);
