@@ -137,7 +137,7 @@ fastify.put('/qa/question/:question_id/report', (req, reply) => {
     });
 });
 
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 5000;
 
 fastify.listen(PORT, '0.0.0.0', (err, address) => {
   if (err) {
